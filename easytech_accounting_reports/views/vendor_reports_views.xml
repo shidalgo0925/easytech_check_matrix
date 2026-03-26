@@ -71,20 +71,20 @@
             <list create="0" delete="0" decoration-bf="is_partner_total">
                 <field name="is_partner_total" column_invisible="1"/>
                 <field name="partner_id"/>
-                <field name="move_id" optional="show" column_invisible="is_partner_total"/>
-                <field name="invoice_date" optional="hide" column_invisible="is_partner_total"/>
-                <field name="invoice_date_due" optional="hide" column_invisible="is_partner_total"/>
-                <field name="days_overdue" column_invisible="is_partner_total"/>
-                <field name="bucket" optional="hide" column_invisible="is_partner_total"/>
-                <field name="currency_id" string="Moneda doc." optional="hide" column_invisible="is_partner_total"/>
+                <field name="move_id" optional="show" invisible="is_partner_total"/>
+                <field name="invoice_date" optional="hide" invisible="is_partner_total"/>
+                <field name="invoice_date_due" optional="hide" invisible="is_partner_total"/>
+                <field name="days_overdue" invisible="is_partner_total"/>
+                <field name="bucket" optional="hide" invisible="is_partner_total"/>
+                <field name="currency_id" string="Moneda doc." optional="hide" invisible="is_partner_total"/>
                 <field name="company_currency_id" column_invisible="1"/>
-                <field name="amount_residual" string="Saldo doc." sum="Total doc." optional="show" column_invisible="is_partner_total"/>
+                <field name="amount_residual" string="Saldo doc." sum="Total doc." optional="show" invisible="is_partner_total"/>
                 <field name="amount_residual_company" string="Saldo comp." sum="Total comp."/>
-                <field name="amount_current" string="Corriente" sum="C" optional="show" column_invisible="is_partner_total"/>
-                <field name="amount_1_30" string="1-30" sum="1-30" optional="show" column_invisible="is_partner_total"/>
-                <field name="amount_31_60" string="31-60" sum="31-60" optional="show" column_invisible="is_partner_total"/>
-                <field name="amount_61_90" string="61-90" sum="61-90" optional="show" column_invisible="is_partner_total"/>
-                <field name="amount_90_plus" string="+90" sum="+90" optional="show" column_invisible="is_partner_total"/>
+                <field name="amount_current" string="Corriente" sum="C" optional="show" invisible="is_partner_total"/>
+                <field name="amount_1_30" string="1-30" sum="1-30" optional="show" invisible="is_partner_total"/>
+                <field name="amount_31_60" string="31-60" sum="31-60" optional="show" invisible="is_partner_total"/>
+                <field name="amount_61_90" string="61-90" sum="61-90" optional="show" invisible="is_partner_total"/>
+                <field name="amount_90_plus" string="+90" sum="+90" optional="show" invisible="is_partner_total"/>
                 <field name="amount_current_company" string="Corriente (comp.)" sum="C (comp.)" optional="show"/>
                 <field name="amount_1_30_company" string="1-30 (comp.)" sum="1-30 (c.)" optional="show"/>
                 <field name="amount_31_60_company" string="31-60 (comp.)" sum="31-60 (c.)" optional="show"/>

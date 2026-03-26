@@ -22,5 +22,5 @@ msgstr "EasyTech Informes y tesorería"
 
 #. module: easytech_accounting_reports
 #: model:ir.module.module,summary:easytech_accounting_reports
-msgid "Requerimientos de efectivo, libro mayor, antigüedad AP y cheques EasyTech"
-msgstr "Requerimientos de efectivo, libro mayor, antigüedad AP y cheques EasyTech"
+msgid "Tesorería proveedores: requerimiento de efectivo, libro mayor, antigüedad AP; seguimiento de cheques matriciales"
+msgstr "Tesorería proveedores: requerimiento de efectivo, libro mayor, antigüedad AP; seguimiento de cheques matriciales"
