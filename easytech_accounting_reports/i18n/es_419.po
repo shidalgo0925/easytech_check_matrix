@@ -1,0 +1,26 @@
+# Translation of Odoo Server.
+# This file contains Spanish (Latin America) strings for UI labels exported with _().
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-26 12:00+0000\n"
+"PO-Revision-Date: 2026-03-26 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish (Latin America)\n"
+"Language: es_419\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: easytech_accounting_reports
+#: model:ir.module.module,shortdesc:easytech_accounting_reports
+msgid "EasyTech Informes y tesorería"
+msgstr "EasyTech Informes y tesorería"
+
+#. module: easytech_accounting_reports
+#: model:ir.module.module,summary:easytech_accounting_reports
+msgid "Requerimientos de efectivo, libro mayor, antigüedad AP y cheques EasyTech"
+msgstr "Requerimientos de efectivo, libro mayor, antigüedad AP y cheques EasyTech"

@@ -116,11 +116,12 @@ class EasytechCashRequirementWizard(models.TransientModel):
         return res
 
     def _search_vendor_open_moves(self, company_id, partner_ids, only_overdue):
+        cid = company_id.id if getattr(company_id, "id", None) else company_id
         domain = [
             ("move_type", "in", ("in_invoice", "in_refund")),
             ("state", "=", "posted"),
             ("payment_state", "in", ("not_paid", "partial")),
-            ("company_id", "=", company_id),
+            ("company_id", "=", cid),
         ]
         if partner_ids:
             domain.append(("partner_id", "in", partner_ids.ids))

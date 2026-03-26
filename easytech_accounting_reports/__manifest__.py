@@ -1,7 +1,7 @@
 {
     "name": "EasyTech Informes y tesorería",
     "summary": "Requerimientos de efectivo, libro mayor, antigüedad AP y cheques EasyTech",
-    "version": "18.0.1.5.0",
+    "version": "18.0.1.6.0",
     "author": "Easy Technology Services Panamá",
     "website": "https://easytech.services",
     "license": "LGPL-3",
