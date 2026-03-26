@@ -19,6 +19,23 @@ Raíz de addons para Odoo **Community 18**. Incluye:
 - Odoo 18 Community
 - Módulos estándar: `account`, `purchase` (para informes contables)
 
+## Pruebas automáticas (opcional)
+
+Con la base de datos de pruebas y el servidor en un puerto libre:
+
+```bash
+odoo-bin ... -d NOMBRE_BD --test-enable --test-tags easytech_accounting --stop-after-init --http-port=8079
+```
+
+## Pruebas automáticas (opcional)
+
+Con la base de datos de pruebas y el servidor en un puerto libre:
+
+```bash
+odoo-bin ... -d NOMBRE_BD --test-enable --test-tags easytech_accounting --stop-after-init --http-port=8079
+```
+
+
 ## Licencia
 
 LGPL-3 (por módulo; ver `__manifest__.py`).
