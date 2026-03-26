@@ -3,7 +3,7 @@
         <html>
             <head>
                 <meta charset="utf-8"/>
-                <title>Diseñador de Cheque Matricial</title>
+                <title><t t-esc="labels['page_title']"/></title>
                 <style>
                     body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; }
                     .wrap { max-width: 1350px; margin: 18px auto; padding: 0 16px; }
@@ -32,43 +32,47 @@
                 </style>
             </head>
             <body>
+                <div id="et_i18n" style="display:none"
+                     t-att-data-saved="labels['msg_saved']"
+                     t-att-data-err="labels['msg_error_prefix']"
+                     t-att-data-unknown="labels['msg_unknown']"/>
                 <div class="wrap">
                     <div class="topbar">
-                        <div class="title">Diseñador de Cheque Matricial v2.1 - <t t-esc="t.name"/></div>
+                        <div class="title"><t t-esc="labels['page_title']"/></div>
                         <div class="actions">
-                            <a class="btn btn-light" t-att-href="'/report/pdf/easytech_check_matrix.report_easytech_check_preview_template/%s' % t.id" target="_blank">Vista previa</a>
-                            <a class="btn btn-light" t-att-href="'/report/pdf/easytech_check_matrix.report_easytech_check_calibration/%s' % t.id" target="_blank">Calibracion</a>
-                            <a class="btn btn-light" t-att-href="'/web#id=%s&amp;model=easytech.check.template&amp;view_type=form' % t.id">Volver a plantilla</a>
+                            <a class="btn btn-light" t-att-href="'/report/pdf/easytech_check_matrix.report_easytech_check_preview_template/%s' % t.id" target="_blank"><t t-esc="labels['preview']"/></a>
+                            <a class="btn btn-light" t-att-href="'/report/pdf/easytech_check_matrix.report_easytech_check_calibration/%s' % t.id" target="_blank"><t t-esc="labels['calibration']"/></a>
+                            <a class="btn btn-light" t-att-href="'/web#id=%s&amp;model=easytech.check.template&amp;view_type=form' % t.id"><t t-esc="labels['back_template']"/></a>
                         </div>
                     </div>
                     <div class="layout">
                         <div class="panel">
-                            <h4>Posiciones (mm)</h4>
-                            <div class="row"><div><label>No. Cheque X</label><input id="check_no_left_mm" t-att-value="t.check_no_left_mm"/></div><div><label>No. Cheque Y</label><input id="check_no_top_mm" t-att-value="t.check_no_top_mm"/></div></div>
-                            <div class="row"><div><label>Fecha X</label><input id="date_left_mm" t-att-value="t.date_left_mm"/></div><div><label>Fecha Y</label><input id="date_top_mm" t-att-value="t.date_top_mm"/></div></div>
-                            <div class="row"><div><label>Beneficiario X</label><input id="beneficiary_left_mm" t-att-value="t.beneficiary_left_mm"/></div><div><label>Beneficiario Y</label><input id="beneficiary_top_mm" t-att-value="t.beneficiary_top_mm"/></div></div>
-                            <div class="row"><div><label>Monto # X</label><input id="amount_num_left_mm" t-att-value="t.amount_num_left_mm"/></div><div><label>Monto # Y</label><input id="amount_num_top_mm" t-att-value="t.amount_num_top_mm"/></div></div>
-                            <div class="row"><div><label>Monto letras X</label><input id="amount_txt_left_mm" t-att-value="t.amount_txt_left_mm"/></div><div><label>Monto letras Y</label><input id="amount_txt_top_mm" t-att-value="t.amount_txt_top_mm"/></div></div>
-                            <div class="row"><div><label>Offset X</label><input id="offset_left_mm" t-att-value="t.offset_left_mm"/></div><div><label>Offset Y</label><input id="offset_top_mm" t-att-value="t.offset_top_mm"/></div></div>
+                            <h4><t t-esc="labels['positions_mm']"/></h4>
+                            <div class="row"><div><label><t t-esc="labels['check_no_x']"/></label><input id="check_no_left_mm" t-att-value="t.check_no_left_mm"/></div><div><label><t t-esc="labels['check_no_y']"/></label><input id="check_no_top_mm" t-att-value="t.check_no_top_mm"/></div></div>
+                            <div class="row"><div><label><t t-esc="labels['date_x']"/></label><input id="date_left_mm" t-att-value="t.date_left_mm"/></div><div><label><t t-esc="labels['date_y']"/></label><input id="date_top_mm" t-att-value="t.date_top_mm"/></div></div>
+                            <div class="row"><div><label><t t-esc="labels['payee_x']"/></label><input id="beneficiary_left_mm" t-att-value="t.beneficiary_left_mm"/></div><div><label><t t-esc="labels['payee_y']"/></label><input id="beneficiary_top_mm" t-att-value="t.beneficiary_top_mm"/></div></div>
+                            <div class="row"><div><label><t t-esc="labels['amount_num_x']"/></label><input id="amount_num_left_mm" t-att-value="t.amount_num_left_mm"/></div><div><label><t t-esc="labels['amount_num_y']"/></label><input id="amount_num_top_mm" t-att-value="t.amount_num_top_mm"/></div></div>
+                            <div class="row"><div><label><t t-esc="labels['amount_words_x']"/></label><input id="amount_txt_left_mm" t-att-value="t.amount_txt_left_mm"/></div><div><label><t t-esc="labels['amount_words_y']"/></label><input id="amount_txt_top_mm" t-att-value="t.amount_txt_top_mm"/></div></div>
+                            <div class="row"><div><label><t t-esc="labels['offset_x']"/></label><input id="offset_left_mm" t-att-value="t.offset_left_mm"/></div><div><label><t t-esc="labels['offset_y']"/></label><input id="offset_top_mm" t-att-value="t.offset_top_mm"/></div></div>
                             <div class="actions">
-                                <button class="btn btn-primary" id="saveBtn">Guardar</button>
-                                <button class="btn btn-light" id="refreshBtn">Refrescar</button>
+                                <button class="btn btn-primary" id="saveBtn"><t t-esc="labels['save']"/></button>
+                                <button class="btn btn-light" id="refreshBtn"><t t-esc="labels['refresh']"/></button>
                             </div>
-                            <div class="hint">Arrastra las cajas (azul). La vista previa negra simula impresion. <span id="status"></span></div>
+                            <div class="hint"><t t-esc="labels['hint']"/> <span id="status"></span></div>
                         </div>
                         <div class="canvas-wrap">
                             <div class="check-canvas" id="canvas" t-att-style="'width:%spx;height:%spx;' % (t.page_width_mm * scale, t.page_height_mm * scale)">
-                                <div class="field" data-x="check_no_left_mm" data-y="check_no_top_mm">No. Cheque</div>
-                                <div class="field" data-x="date_left_mm" data-y="date_top_mm">Fecha</div>
-                                <div class="field" data-x="beneficiary_left_mm" data-y="beneficiary_top_mm">Beneficiario</div>
-                                <div class="field" data-x="amount_num_left_mm" data-y="amount_num_top_mm">Monto #</div>
-                                <div class="field" data-x="amount_txt_left_mm" data-y="amount_txt_top_mm">Monto letras</div>
-                                
+                                <div class="field" data-x="check_no_left_mm" data-y="check_no_top_mm"><t t-esc="labels['overlay_check']"/></div>
+                                <div class="field" data-x="date_left_mm" data-y="date_top_mm"><t t-esc="labels['overlay_date']"/></div>
+                                <div class="field" data-x="beneficiary_left_mm" data-y="beneficiary_top_mm"><t t-esc="labels['overlay_payee']"/></div>
+                                <div class="field" data-x="amount_num_left_mm" data-y="amount_num_top_mm"><t t-esc="labels['overlay_amount_num']"/></div>
+                                <div class="field" data-x="amount_txt_left_mm" data-y="amount_txt_top_mm"><t t-esc="labels['overlay_amount_words']"/></div>
+
                                 <div class="preview-item" data-x="check_no_left_mm" data-y="check_no_top_mm"><strong>000123</strong></div>
                                 <div class="preview-item date" data-x="date_left_mm" data-y="date_top_mm">26032026</div>
-                                <div class="preview-item beneficiary" data-x="beneficiary_left_mm" data-y="beneficiary_top_mm">QUIMPAC DE COLOMBIA S A</div>
+                                <div class="preview-item beneficiary" data-x="beneficiary_left_mm" data-y="beneficiary_top_mm">SAMPLE COMPANY S A</div>
                                 <div class="preview-item amount-num" data-x="amount_num_left_mm" data-y="amount_num_top_mm">963.00 PAB</div>
-                                <div class="preview-item amount-text" data-x="amount_txt_left_mm" data-y="amount_txt_top_mm">Novecientos Sesenta y Tres Balboa</div>
+                                <div class="preview-item amount-text" data-x="amount_txt_left_mm" data-y="amount_txt_top_mm"><t t-esc="t.env._('Nine hundred sixty-three balboa')"/></div>
                             </div>
                         </div>
                     </div>
@@ -78,6 +82,8 @@
                     const scale = <t t-esc="scale"/>;
                     const fields = Array.from(document.querySelectorAll('.field'));
                     const statusEl = document.getElementById('status');
+                    const i18nEl = document.getElementById('et_i18n');
+                    const i18n = i18nEl ? i18nEl.dataset : {};
 
                     function toNum(v){ const n = parseFloat(v); return isNaN(n) ? 0 : n; }
                     function getVal(id){ return toNum(document.getElementById(id).value); }
@@ -136,7 +142,8 @@
                         });
                         const j = await r.json();
                         const res = j.result || j;
-                        statusEl.textContent = res.ok ? 'Guardado' : ('Error: ' + (res.error || 'desconocido'));
+                        const unk = i18n.unknown || 'unknown';
+                        statusEl.textContent = res.ok ? (i18n.saved || '') : ((i18n.err || 'Error:') + ' ' + (res.error || unk));
                         statusEl.className = res.ok ? 'ok' : '';
                     });
 

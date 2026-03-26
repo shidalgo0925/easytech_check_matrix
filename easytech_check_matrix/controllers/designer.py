@@ -1,4 +1,4 @@
-from odoo import http
+from odoo import http, _
 from odoo.http import request
 
 
@@ -27,11 +27,42 @@ class EasytechCheckDesignerController(http.Controller):
             return request.not_found()
         if not request.env.user.has_group("easytech_check_matrix.group_easytech_check_manager"):
             return request.not_found()
+        labels = {
+            "page_title": _("Matrix check designer v2.1 - %s") % template.name,
+            "preview": _("Preview"),
+            "calibration": _("Calibration"),
+            "back_template": _("Back to template"),
+            "positions_mm": _("Positions (mm)"),
+            "check_no_x": _("Check no. X"),
+            "check_no_y": _("Check no. Y"),
+            "date_x": _("Date X"),
+            "date_y": _("Date Y"),
+            "payee_x": _("Payee X"),
+            "payee_y": _("Payee Y"),
+            "amount_num_x": _("Amount # X"),
+            "amount_num_y": _("Amount # Y"),
+            "amount_words_x": _("Amount in words X"),
+            "amount_words_y": _("Amount in words Y"),
+            "offset_x": _("Offset X"),
+            "offset_y": _("Offset Y"),
+            "save": _("Save"),
+            "refresh": _("Refresh"),
+            "hint": _("Drag the blue boxes. The black preview simulates printing."),
+            "overlay_check": _("Check no."),
+            "overlay_date": _("Date"),
+            "overlay_payee": _("Payee"),
+            "overlay_amount_num": _("Amount #"),
+            "overlay_amount_words": _("Amount in words"),
+            "msg_saved": _("Saved"),
+            "msg_error_prefix": _("Error:"),
+            "msg_unknown": _("Unknown error"),
+        }
         response = request.render(
             "easytech_check_matrix.check_template_designer_page",
             {
                 "t": template,
                 "scale": 3.0,
+                "labels": labels,
             },
         )
         response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"

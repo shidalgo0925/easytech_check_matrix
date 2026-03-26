@@ -1,6 +1,6 @@
 <odoo>
     <record id="paperformat_easytech_check_matrix" model="report.paperformat">
-        <field name="name">Cheque Matricial EasyTech 5.5x11</field>
+        <field name="name">EasyTech matrix check 5.5x11</field>
         <field name="default" eval="False"/>
         <field name="format">custom</field>
         <field name="page_height">279</field>
@@ -14,7 +14,7 @@
     </record>
 
     <record id="action_report_easytech_check" model="ir.actions.report">
-        <field name="name">Cheque Matricial EasyTech</field>
+        <field name="name">EasyTech matrix check</field>
         <field name="model">account.payment</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">easytech_check_matrix.report_easytech_check</field>
@@ -26,7 +26,7 @@
 
 
     <record id="paperformat_easytech_check_calibration" model="report.paperformat">
-        <field name="name">Cheque Matricial EasyTech Calibracion</field>
+        <field name="name">EasyTech matrix check calibration</field>
         <field name="default" eval="False"/>
         <field name="format">custom</field>
         <field name="page_height">279</field>
@@ -40,7 +40,7 @@
     </record>
 
     <record id="action_report_easytech_check_calibration" model="ir.actions.report">
-        <field name="name">Calibracion Cheque Matricial</field>
+        <field name="name">Matrix check calibration</field>
         <field name="model">easytech.check.template</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">easytech_check_matrix.report_easytech_check_calibration</field>
@@ -50,7 +50,7 @@
 
 
     <record id="action_report_easytech_check_preview_template" model="ir.actions.report">
-        <field name="name">Vista previa Cheque Matricial</field>
+        <field name="name">Matrix check preview</field>
         <field name="model">easytech.check.template</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">easytech_check_matrix.report_easytech_check_preview_template</field>

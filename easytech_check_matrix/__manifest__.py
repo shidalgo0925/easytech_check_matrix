@@ -1,21 +1,22 @@
 {
-    "name": "Cheque Matricial EasyTech",
-    "summary": "Emisión y previsualización de cheques matriciales multibanco",
+    "name": "EasyTech Matrix Check",
+    "summary": "Matrix check printing and preview on preprinted forms (multi-bank)",
     "description": """
-Motor de emisión de cheques EasyTech para Odoo Community.
+EasyTech matrix check engine for Odoo Community.
 
-- Basado en account.payment.
-- Botón de cheque matricial en pagos.
-- Acción masiva desde lista de pagos.
-- Previsualización individual o por lote.
-- Impresión con control de estado y numeración por chequera.
-- Plantillas dinámicas por banco con offsets.
+- Based on account.payment.
+- Matrix check button on payments.
+- Batch action from payment list.
+- Single or batch preview.
+- Printing with status and checkbook numbering.
+- Per-bank templates with offsets.
 """,
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "author": "Easy Technology Services Panamá",
     "website": "https://easytech.services",
     "license": "LGPL-3",
     "category": "Accounting",
+    "icon": "/easytech_check_matrix/static/description/icon.png",
     "depends": ["account"],
     "data": [
         "security/security.xml",
@@ -31,6 +32,7 @@ Motor de emisión de cheques EasyTech para Odoo Community.
         "report/check_preview_template.xml",
         "report/check_calibration_template.xml"
     ],
+    "images": ["static/description/icon.png"],
     "installable": True,
     "application": False,
 }

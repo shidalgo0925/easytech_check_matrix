@@ -5,21 +5,29 @@ from odoo.exceptions import UserError
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
-    easytech_check_number = fields.Char(string="Número de cheque", copy=False, readonly=True, index=True)
+    easytech_check_number = fields.Char(
+        string=_("Check number"), copy=False, readonly=True, index=True
+    )
     easytech_check_state = fields.Selection(
         [
-            ("draft", "Borrador"),
-            ("printed", "Impreso"),
-            ("cancelled", "Anulado"),
+            ("draft", _("Draft")),
+            ("printed", _("Printed")),
+            ("cancelled", _("Cancelled")),
         ],
-        string="Estado del cheque",
+        string=_("Check status"),
         default="draft",
         copy=False,
         readonly=True,
     )
-    easytech_printed = fields.Boolean(string="Cheque impreso", default=False, copy=False, readonly=True)
-    easytech_checkbook_id = fields.Many2one("easytech.checkbook", string="Chequera", copy=False, readonly=True)
-    easytech_check_template_id = fields.Many2one("easytech.check.template", string="Plantilla de cheque", copy=False)
+    easytech_printed = fields.Boolean(
+        string=_("Check printed"), default=False, copy=False, readonly=True
+    )
+    easytech_checkbook_id = fields.Many2one(
+        "easytech.checkbook", string=_("Checkbook"), copy=False, readonly=True
+    )
+    easytech_check_template_id = fields.Many2one(
+        "easytech.check.template", string=_("Check template"), copy=False
+    )
 
     easytech_is_check = fields.Boolean(compute="_compute_easytech_is_check")
 
@@ -38,9 +46,9 @@ class AccountPayment(models.Model):
     def _easytech_validate_check_payment(self):
         self.ensure_one()
         if not self.easytech_is_check:
-            raise UserError(_("Este pago no está marcado como cheque."))
+            raise UserError(_("This payment is not flagged as a check."))
         if self.state not in ("posted", "in_process"):
-            raise UserError(_("Solo se puede imprimir cheque en pagos confirmados/publicados."))
+            raise UserError(_("Checks can only be printed on posted or in-process payments."))
 
     def _easytech_assign_number_if_needed(self):
         self.ensure_one()
@@ -48,7 +56,7 @@ class AccountPayment(models.Model):
             return
         checkbook = self.easytech_checkbook_id or self.journal_id.easytech_checkbook_id
         if not checkbook:
-            raise UserError(_("Debe configurar una chequera en el diario o en el pago."))
+            raise UserError(_("Configure a checkbook on the journal or on the payment."))
         self.write(
             {
                 "easytech_checkbook_id": checkbook.id,
@@ -60,7 +68,7 @@ class AccountPayment(models.Model):
         self.ensure_one()
         template = self.journal_id.easytech_check_template_id or self.easytech_check_template_id
         if not template:
-            raise UserError(_("Debe configurar una plantilla de cheque en el diario o en el pago."))
+            raise UserError(_("Configure a check template on the journal or on the payment."))
         if self.easytech_check_template_id != template:
             self.easytech_check_template_id = template
         return template
@@ -68,16 +76,16 @@ class AccountPayment(models.Model):
     def action_preview_check_matrix(self):
         self.ensure_one()
         if not self.easytech_is_check:
-            raise UserError(_("Este pago no está marcado como cheque."))
+            raise UserError(_("This payment is not flagged as a check."))
         self._easytech_get_template_or_error()
         return self.env.ref("easytech_check_matrix.action_report_easytech_check").report_action(self)
 
     def action_batch_check_preview(self):
         if not self:
-            raise UserError(_("Debe seleccionar al menos un pago."))
+            raise UserError(_("Select at least one payment."))
         invalid = self.filtered(lambda p: not p.easytech_is_check)
         if invalid:
-            raise UserError(_("Todos los pagos seleccionados deben ser pagos por cheque."))
+            raise UserError(_("All selected payments must be check payments."))
         for pay in self:
             pay._easytech_get_template_or_error()
         return self.env.ref("easytech_check_matrix.action_report_easytech_check").report_action(self)
@@ -86,7 +94,7 @@ class AccountPayment(models.Model):
         for pay in self:
             pay._easytech_validate_check_payment()
             if pay.easytech_printed:
-                raise UserError(_("El cheque %s ya fue impreso.") % (pay.easytech_check_number or ""))
+                raise UserError(_("Check %s has already been printed.") % (pay.easytech_check_number or ""))
             pay._easytech_assign_number_if_needed()
             pay._easytech_get_template_or_error()
             pay.write(
@@ -102,4 +110,3 @@ class AccountPayment(models.Model):
             if pay.easytech_check_state == "cancelled":
                 continue
             pay.write({"easytech_check_state": "cancelled"})
-

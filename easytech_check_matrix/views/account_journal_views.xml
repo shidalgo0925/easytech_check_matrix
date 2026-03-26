@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[.//field[@name='bank_account_id']]" position="after">
-                <group string="Cheque Matricial EasyTech">
+                <group string="EasyTech matrix check">
                     <field name="easytech_use_check_matrix"/>
                     <field name="easytech_checkbook_id" invisible="not easytech_use_check_matrix"/>
                     <field name="easytech_check_template_id" invisible="not easytech_use_check_matrix"/>

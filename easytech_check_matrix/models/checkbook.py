@@ -4,25 +4,31 @@ from odoo.exceptions import ValidationError
 
 class EasytechCheckbook(models.Model):
     _name = "easytech.checkbook"
-    _description = "Chequera EasyTech"
+    _description = _("EasyTech checkbook")
 
-    name = fields.Char(required=True)
-    active = fields.Boolean(default=True)
-    company_id = fields.Many2one("res.company", default=lambda self: self.env.company, required=True)
+    name = fields.Char(required=True, string=_("Name"))
+    active = fields.Boolean(default=True, string=_("Active"))
+    company_id = fields.Many2one(
+        "res.company",
+        string=_("Company"),
+        default=lambda self: self.env.company,
+        required=True,
+    )
     journal_id = fields.Many2one(
         "account.journal",
+        string=_("Journal"),
         required=True,
         domain="[('type','in',('bank','cash')),('company_id','=',company_id)]",
     )
-    number_start = fields.Integer(required=True)
-    number_end = fields.Integer(required=True)
-    current_number = fields.Integer(default=0)
+    number_start = fields.Integer(string=_("Start number"), required=True)
+    number_end = fields.Integer(string=_("End number"), required=True)
+    current_number = fields.Integer(string=_("Current number"), default=0)
 
     _sql_constraints = [
         (
             "easytech_checkbook_range",
             "CHECK(number_end >= number_start)",
-            "El número final debe ser mayor o igual al inicial.",
+            _("The end number must be greater than or equal to the start number."),
         ),
     ]
 
@@ -30,9 +36,9 @@ class EasytechCheckbook(models.Model):
     def _check_current_number(self):
         for rec in self:
             if rec.current_number and rec.current_number < rec.number_start:
-                raise ValidationError(_("El número actual no puede ser menor al inicial."))
+                raise ValidationError(_("Current number cannot be less than the start number."))
             if rec.current_number and rec.current_number > rec.number_end:
-                raise ValidationError(_("El número actual no puede superar el número final."))
+                raise ValidationError(_("Current number cannot exceed the end number."))
 
     def get_next_number(self):
         self.ensure_one()
@@ -44,7 +50,7 @@ class EasytechCheckbook(models.Model):
         next_number = (current or (start - 1)) + 1
         if next_number > end:
             raise ValidationError(
-                _("La chequera %s no tiene números disponibles (último: %s).") % (self.display_name, end)
+                _("Checkbook %s has no numbers left (last: %s).") % (self.display_name, end)
             )
         self.env.cr.execute(
             "UPDATE easytech_checkbook SET current_number=%s WHERE id=%s",

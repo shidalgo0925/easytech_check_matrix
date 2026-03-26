@@ -13,13 +13,13 @@
                         <span t-esc="dstr[4:8]"/>
                     </div>
                     <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;width:72mm;white-space:nowrap;overflow:hidden;text-overflow:clip;' % (t.beneficiary_top_mm + t.offset_top_mm, t.beneficiary_left_mm + t.offset_left_mm)">
-                        <span>QUIMPAC DE COLOMBIA S A</span>
+                        <span t-esc="t.env._('SAMPLE COMPANY S A')"/>
                     </div>
                     <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;width:35mm;white-space:nowrap;overflow:hidden;text-overflow:clip;' % (t.amount_num_top_mm + t.offset_top_mm, t.amount_num_left_mm + t.offset_left_mm)">
                         <span>963.00 PAB</span>
                     </div>
                     <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;max-width:85mm; white-space:normal; line-height:1.2;' % (t.amount_txt_top_mm + t.offset_top_mm, t.amount_txt_left_mm + t.offset_left_mm)">
-                        <span>Novecientos Sesenta y Tres Balboa</span>
+                        <span t-esc="t.env._('Nine hundred sixty-three balboa')"/>
                     </div>
                 </div>
             </t>

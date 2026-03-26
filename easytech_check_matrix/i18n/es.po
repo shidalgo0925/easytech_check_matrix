@@ -1,0 +1,533 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* easytech_check_matrix
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-26 12:00+0000\n"
+"PO-Revision-Date: 2025-03-26 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: easytech_check_matrix
+#: model:ir.module.module,shortdesc:0
+msgid "EasyTech Matrix Check"
+msgstr "Cheque matricial EasyTech"
+
+#. module: easytech_check_matrix
+#: model:ir.module.module,summary:0
+msgid "Matrix check printing and preview on preprinted forms (multi-bank)"
+msgstr "Impresión y vista previa de cheques matriciales en formularios preimpresos (multi-banco)"
+
+#. module: easytech_check_matrix
+#: model:ir.module.module,description:0
+msgid ""
+"\n"
+"EasyTech matrix check engine for Odoo Community.\n"
+"\n"
+"- Based on account.payment.\n"
+"- Matrix check button on payments.\n"
+"- Batch action from payment list.\n"
+"- Single or batch preview.\n"
+"- Printing with status and checkbook numbering.\n"
+"- Per-bank templates with offsets.\n"
+msgstr ""
+"\n"
+"Motor de cheque matricial EasyTech para Odoo Community.\n"
+"\n"
+"- Basado en account.payment.\n"
+"- Botón de cheque matricial en pagos.\n"
+"- Acción por lotes desde la lista de pagos.\n"
+"- Vista previa individual o por lotes.\n"
+"- Impresión con estado y numeración por chequera.\n"
+"- Plantillas por banco con desplazamientos.\n"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_payment__easytech_check_number
+msgid "Check number"
+msgstr "Número de cheque"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields.selection,name:easytech_check_matrix.selection__account_payment__easytech_check_state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields.selection,name:easytech_check_matrix.selection__account_payment__easytech_check_state__printed
+msgid "Printed"
+msgstr "Impreso"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields.selection,name:easytech_check_matrix.selection__account_payment__easytech_check_state__cancelled
+msgid "Cancelled"
+msgstr "Anulado"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_payment__easytech_check_state
+msgid "Check status"
+msgstr "Estado del cheque"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_payment__easytech_printed
+msgid "Check printed"
+msgstr "Cheque impreso"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_payment__easytech_checkbook_id
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_journal__easytech_checkbook_id
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__name
+msgid "Checkbook"
+msgstr "Chequera"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_payment__easytech_check_template_id
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_journal__easytech_check_template_id
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__name
+msgid "Check template"
+msgstr "Plantilla de cheque"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_journal__easytech_use_check_matrix
+msgid "Use EasyTech matrix check printing"
+msgstr "Usar impresión de cheque matricial EasyTech"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_account_journal__easytech_checkbook_id
+msgid "Default checkbook"
+msgstr "Chequera por defecto"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "This payment is not flagged as a check."
+msgstr "Este pago no está marcado como cheque."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "Checks can only be printed on posted or in-process payments."
+msgstr "Los cheques solo pueden imprimirse en pagos publicados o en proceso."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "Configure a checkbook on the journal or on the payment."
+msgstr "Configure una chequera en el diario o en el pago."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "Configure a check template on the journal or on the payment."
+msgstr "Configure una plantilla de cheque en el diario o en el pago."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "Select at least one payment."
+msgstr "Seleccione al menos un pago."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "All selected payments must be check payments."
+msgstr "Todos los pagos seleccionados deben ser cheques."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/account_payment.py:0
+msgid "Check %s has already been printed."
+msgstr "El cheque %s ya ha sido impreso."
+
+#. module: easytech_check_matrix
+#: model:ir.model,name:easytech_check_matrix.model_easytech_checkbook
+msgid "EasyTech checkbook"
+msgstr "Chequera EasyTech"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__active
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__company_id
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__journal_id
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__number_start
+msgid "Start number"
+msgstr "Número inicial"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__number_end
+msgid "End number"
+msgstr "Número final"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_checkbook__current_number
+msgid "Current number"
+msgstr "Número actual"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/checkbook.py:0
+msgid "The end number must be greater than or equal to the start number."
+msgstr "El número final debe ser mayor o igual al número inicial."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/checkbook.py:0
+msgid "Current number cannot be less than the start number."
+msgstr "El número actual no puede ser menor que el número inicial."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/checkbook.py:0
+msgid "Current number cannot exceed the end number."
+msgstr "El número actual no puede superar el número final."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/models/checkbook.py:0
+msgid "Checkbook %s has no numbers left (last: %s)."
+msgstr "La chequera %s no tiene números disponibles (último: %s)."
+
+#. module: easytech_check_matrix
+#: model:ir.model,name:easytech_check_matrix.model_easytech_check_template
+msgid "Matrix check template"
+msgstr "Plantilla de cheque matricial"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,help:easytech_check_matrix.field_easytech_check_template__journal_id
+msgid "Optional: preferred template for this journal."
+msgstr "Opcional: plantilla preferida para este diario."
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__page_height_mm
+msgid "Page height (mm)"
+msgstr "Alto de página (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__page_width_mm
+msgid "Page width (mm)"
+msgstr "Ancho de página (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__offset_top_mm
+msgid "Offset top (mm)"
+msgstr "Desplazamiento superior (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__offset_left_mm
+msgid "Offset left (mm)"
+msgstr "Desplazamiento izquierdo (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__check_no_top_mm
+msgid "Check number top (mm)"
+msgstr "Número de cheque arriba (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__check_no_left_mm
+msgid "Check number left (mm)"
+msgstr "Número de cheque izquierda (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__date_top_mm
+msgid "Date top (mm)"
+msgstr "Fecha arriba (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__date_left_mm
+msgid "Date left (mm)"
+msgstr "Fecha izquierda (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__date_digit_spacing_mm
+msgid "Date digit spacing (mm)"
+msgstr "Espaciado de dígitos de fecha (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__date_group_gap_mm
+msgid "Date group gap (mm)"
+msgstr "Separación entre grupos de fecha (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__beneficiary_top_mm
+msgid "Payee top (mm)"
+msgstr "Beneficiario arriba (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__beneficiary_left_mm
+msgid "Payee left (mm)"
+msgstr "Beneficiario izquierda (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__amount_num_top_mm
+msgid "Amount (figures) top (mm)"
+msgstr "Monto (cifras) arriba (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__amount_num_left_mm
+msgid "Amount (figures) left (mm)"
+msgstr "Monto (cifras) izquierda (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__amount_txt_top_mm
+msgid "Amount (words) top (mm)"
+msgstr "Monto (letras) arriba (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__amount_txt_left_mm
+msgid "Amount (words) left (mm)"
+msgstr "Monto (letras) izquierda (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__voucher_top_mm
+msgid "Voucher top (mm)"
+msgstr "Comprobante arriba (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.model.fields,field_description:easytech_check_matrix.field_easytech_check_template__voucher_left_mm
+msgid "Voucher left (mm)"
+msgstr "Comprobante izquierda (mm)"
+
+#. module: easytech_check_matrix
+#: model:ir.actions.act_window,name:easytech_check_matrix.action_easytech_checkbook
+#: model:ir.ui.menu,name:easytech_check_matrix.menu_easytech_checkbook
+msgid "Checkbooks"
+msgstr "Chequeras"
+
+#. module: easytech_check_matrix
+#: model:ir.actions.act_window,name:easytech_check_matrix.action_easytech_check_template
+#: model:ir.ui.menu,name:easytech_check_matrix.menu_easytech_check_template
+msgid "Check templates"
+msgstr "Plantillas de cheque"
+
+#. module: easytech_check_matrix
+#: model_terms:ir.ui.view,arch_db:easytech_check_matrix.view_easytech_check_template_form
+msgid "Visual designer"
+msgstr "Diseñador visual"
+
+#. module: easytech_check_matrix
+#: model_terms:ir.ui.view,arch_db:easytech_check_matrix.view_easytech_check_template_form
+msgid "Page size and offsets (mm)"
+msgstr "Tamaño de página y desplazamientos (mm)"
+
+#. module: easytech_check_matrix
+#: model_terms:ir.ui.view,arch_db:easytech_check_matrix.view_easytech_check_template_form
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Positions (mm)"
+msgstr "Posiciones (mm)"
+
+#. module: easytech_check_matrix
+#: model_terms:ir.ui.view,arch_db:easytech_check_matrix.view_account_journal_form_easytech_matrix
+#: model:ir.actions.server,name:easytech_check_matrix.action_print_checks_matrix
+#: model:ir.actions.report,name:easytech_check_matrix.action_report_easytech_check
+msgid "EasyTech matrix check"
+msgstr "Cheque matricial EasyTech"
+
+#. module: easytech_check_matrix
+#: model_terms:ir.ui.view,arch_db:easytech_check_matrix.view_account_payment_form_easytech_matrix
+msgid "Matrix check"
+msgstr "Cheque matricial"
+
+#. module: easytech_check_matrix
+#: model_terms:ir.ui.view,arch_db:easytech_check_matrix.view_account_payment_form_easytech_matrix
+msgid "Void check"
+msgstr "Anular cheque"
+
+#. module: easytech_check_matrix
+#: model:res.groups,name:easytech_check_matrix.group_easytech_check_user
+msgid "EasyTech matrix check user"
+msgstr "Usuario de cheque matricial EasyTech"
+
+#. module: easytech_check_matrix
+#: model:res.groups,name:easytech_check_matrix.group_easytech_check_manager
+msgid "EasyTech matrix check manager"
+msgstr "Responsable de cheque matricial EasyTech"
+
+#. module: easytech_check_matrix
+#: model:report.paperformat,name:easytech_check_matrix.paperformat_easytech_check_matrix
+msgid "EasyTech matrix check 5.5x11"
+msgstr "Cheque matricial EasyTech 5.5x11"
+
+#. module: easytech_check_matrix
+#: model:report.paperformat,name:easytech_check_matrix.paperformat_easytech_check_calibration
+msgid "EasyTech matrix check calibration"
+msgstr "Calibración de cheque matricial EasyTech"
+
+#. module: easytech_check_matrix
+#: model:ir.actions.report,name:easytech_check_matrix.action_report_easytech_check_calibration
+msgid "Matrix check calibration"
+msgstr "Calibración de cheque matricial"
+
+#. module: easytech_check_matrix
+#: model:ir.actions.report,name:easytech_check_matrix.action_report_easytech_check_preview_template
+msgid "Matrix check preview"
+msgstr "Vista previa de cheque matricial"
+
+#. module: easytech_check_matrix
+#: report:report_easytech_check:0
+msgid "Missing check template on the payment or journal."
+msgstr "Falta la plantilla de cheque en el pago o en el diario."
+
+#. module: easytech_check_matrix
+#: report:report_easytech_check_calibration:0
+msgid "CHECK CALIBRATION"
+msgstr "CALIBRACIÓN DE CHEQUE"
+
+#. module: easytech_check_matrix
+#: report:report_easytech_check_calibration:0
+msgid "X (check)"
+msgstr "X (cheque)"
+
+#. module: easytech_check_matrix
+#: report:report_easytech_check_preview_template:0
+msgid "SAMPLE COMPANY S A"
+msgstr "EMPRESA DE EJEMPLO S A"
+
+#. module: easytech_check_matrix
+#: report:report_easytech_check_preview_template:0
+#: report:check_template_designer_page:0
+msgid "Nine hundred sixty-three balboa"
+msgstr "Novecientos sesenta y tres balboa"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Matrix check designer v2.1 - %s"
+msgstr "Diseñador de cheque matricial v2.1 - %s"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Preview"
+msgstr "Vista previa"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Calibration"
+msgstr "Calibración"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Back to template"
+msgstr "Volver a la plantilla"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Check no. X"
+msgstr "Nº cheque X"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Check no. Y"
+msgstr "Nº cheque Y"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Date X"
+msgstr "Fecha X"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Date Y"
+msgstr "Fecha Y"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Payee X"
+msgstr "Beneficiario X"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Payee Y"
+msgstr "Beneficiario Y"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Amount # X"
+msgstr "Monto # X"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Amount # Y"
+msgstr "Monto # Y"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Amount in words X"
+msgstr "Monto en letras X"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Amount in words Y"
+msgstr "Monto en letras Y"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Offset X"
+msgstr "Desplazamiento X"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Offset Y"
+msgstr "Desplazamiento Y"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Save"
+msgstr "Guardar"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Refresh"
+msgstr "Actualizar"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Drag the blue boxes. The black preview simulates printing."
+msgstr "Arrastre las cajas azules. La vista previa en negro simula la impresión."
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Check no."
+msgstr "Nº cheque"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Payee"
+msgstr "Beneficiario"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Amount #"
+msgstr "Monto #"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Amount in words"
+msgstr "Monto en letras"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Saved"
+msgstr "Guardado"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Error:"
+msgstr "Error:"
+
+#. module: easytech_check_matrix
+#: code:addons/easytech_check_matrix/controllers/designer.py:0
+msgid "Unknown error"
+msgstr "Error desconocido"

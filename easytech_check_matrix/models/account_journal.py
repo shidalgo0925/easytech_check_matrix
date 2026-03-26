@@ -1,17 +1,19 @@
-from odoo import fields, models
+from odoo import fields, models, _
 
 
 class AccountJournal(models.Model):
     _inherit = "account.journal"
 
-    easytech_use_check_matrix = fields.Boolean(string="Usar Cheque Matricial EasyTech")
+    easytech_use_check_matrix = fields.Boolean(
+        string=_("Use EasyTech matrix check printing")
+    )
     easytech_checkbook_id = fields.Many2one(
         "easytech.checkbook",
-        string="Chequera por defecto",
+        string=_("Default checkbook"),
         domain="[('company_id','=',company_id)]",
     )
     easytech_check_template_id = fields.Many2one(
         "easytech.check.template",
-        string="Plantilla de cheque",
+        string=_("Check template"),
         domain="[('company_id','=',company_id)]",
     )

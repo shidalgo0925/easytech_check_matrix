@@ -6,20 +6,20 @@
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <button name="action_preview_check_matrix"
-                        string="Cheque Matricial"
+                        string="Matrix check"
                         type="object"
                         class="btn-secondary"
                         groups="easytech_check_matrix.group_easytech_check_user"
                         invisible="not easytech_is_check"/>
 
                 <button name="action_cancel_check_matrix"
-                        string="Anular cheque"
+                        string="Void check"
                         type="object"
                         groups="easytech_check_matrix.group_easytech_check_manager"
                         invisible="easytech_check_state == 'cancelled' or not easytech_check_number"/>
             </xpath>
             <xpath expr="//sheet/group" position="inside">
-                <group string="Cheque Matricial EasyTech">
+                <group string="EasyTech matrix check">
                     <field name="easytech_check_number" readonly="1"/>
                     <field name="easytech_check_state" readonly="1"/>
                     <field name="easytech_printed" readonly="1"/>
