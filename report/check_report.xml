@@ -1,0 +1,61 @@
+<odoo>
+    <record id="paperformat_easytech_check_matrix" model="report.paperformat">
+        <field name="name">Cheque Matricial EasyTech 5.5x11</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">279</field>
+        <field name="page_width">140</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_easytech_check" model="ir.actions.report">
+        <field name="name">Cheque Matricial EasyTech</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">easytech_check_matrix.report_easytech_check</field>
+        <field name="report_file">easytech_check_matrix.report_easytech_check</field>
+        <field name="paperformat_id" ref="easytech_check_matrix.paperformat_easytech_check_matrix"/>
+        <field name="binding_model_id" ref="account.model_account_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <record id="paperformat_easytech_check_calibration" model="report.paperformat">
+        <field name="name">Cheque Matricial EasyTech Calibracion</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">279</field>
+        <field name="page_width">140</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_easytech_check_calibration" model="ir.actions.report">
+        <field name="name">Calibracion Cheque Matricial</field>
+        <field name="model">easytech.check.template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">easytech_check_matrix.report_easytech_check_calibration</field>
+        <field name="report_file">easytech_check_matrix.report_easytech_check_calibration</field>
+        <field name="paperformat_id" ref="easytech_check_matrix.paperformat_easytech_check_calibration"/>
+    </record>
+
+
+    <record id="action_report_easytech_check_preview_template" model="ir.actions.report">
+        <field name="name">Vista previa Cheque Matricial</field>
+        <field name="model">easytech.check.template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">easytech_check_matrix.report_easytech_check_preview_template</field>
+        <field name="report_file">easytech_check_matrix.report_easytech_check_preview_template</field>
+        <field name="paperformat_id" ref="easytech_check_matrix.paperformat_easytech_check_matrix"/>
+    </record>
+
+</odoo>

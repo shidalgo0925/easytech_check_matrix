@@ -1,0 +1,70 @@
+<odoo>
+    <record id="view_easytech_check_template_tree" model="ir.ui.view">
+        <field name="name">easytech.check.template.tree</field>
+        <field name="model">easytech.check.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="journal_id"/>
+                <field name="page_width_mm"/>
+                <field name="page_height_mm"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_easytech_check_template_form" model="ir.ui.view">
+        <field name="name">easytech.check.template.form</field>
+        <field name="model">easytech.check.template</field>
+        <field name="arch" type="xml">
+            <form string="Plantilla de Cheque Matricial">
+                <header>
+                    <button name="action_open_visual_designer" string="Diseñador visual" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id"/>
+                        <field name="journal_id"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Tamaño y offsets (mm)">
+                        <field name="page_width_mm"/>
+                        <field name="page_height_mm"/>
+                        <field name="offset_left_mm"/>
+                        <field name="offset_top_mm"/>
+                    </group>
+                    <group string="Posiciones (mm)">
+                        <field name="check_no_left_mm"/>
+                        <field name="check_no_top_mm"/>
+                        <field name="date_left_mm"/>
+                        <field name="date_top_mm"/>
+                        <field name="date_digit_spacing_mm"/>
+                        <field name="date_group_gap_mm"/>
+                        <field name="beneficiary_left_mm"/>
+                        <field name="beneficiary_top_mm"/>
+                        <field name="amount_num_left_mm"/>
+                        <field name="amount_num_top_mm"/>
+                        <field name="amount_txt_left_mm"/>
+                        <field name="amount_txt_top_mm"/>
+                        <field name="voucher_left_mm"/>
+                        <field name="voucher_top_mm"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_easytech_check_template" model="ir.actions.act_window">
+        <field name="name">Plantillas de Cheque</field>
+        <field name="res_model">easytech.check.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_easytech_check_template"
+              name="Plantillas de Cheque"
+              parent="account.menu_finance_configuration"
+              action="action_easytech_check_template"
+              sequence="92"
+              groups="easytech_check_matrix.group_easytech_check_manager"/>
+</odoo>

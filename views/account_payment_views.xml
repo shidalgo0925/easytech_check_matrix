@@ -1,0 +1,43 @@
+<odoo>
+    <record id="view_account_payment_form_easytech_matrix" model="ir.ui.view">
+        <field name="name">account.payment.form.easytech.matrix</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_preview_check_matrix"
+                        string="Cheque Matricial"
+                        type="object"
+                        class="btn-secondary"
+                        groups="easytech_check_matrix.group_easytech_check_user"
+                        invisible="not easytech_is_check"/>
+
+                <button name="action_cancel_check_matrix"
+                        string="Anular cheque"
+                        type="object"
+                        groups="easytech_check_matrix.group_easytech_check_manager"
+                        invisible="easytech_check_state == 'cancelled' or not easytech_check_number"/>
+            </xpath>
+            <xpath expr="//sheet/group" position="inside">
+                <group string="Cheque Matricial EasyTech">
+                    <field name="easytech_check_number" readonly="1"/>
+                    <field name="easytech_check_state" readonly="1"/>
+                    <field name="easytech_printed" readonly="1"/>
+                    <field name="easytech_checkbook_id" readonly="1"/>
+                    <field name="easytech_check_template_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_payment_hide_standard_check_button" model="ir.ui.view">
+        <field name="name">account.payment.hide.standard.check.button.easytech</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account_check_printing.view_account_payment_form_inherited"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='print_checks']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

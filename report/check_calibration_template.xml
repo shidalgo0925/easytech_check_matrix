@@ -1,0 +1,25 @@
+<odoo>
+    <template id="report_easytech_check_calibration">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="t">
+                    <div class="page" t-att-style="'position:relative; width:%smm; height:%smm; margin:0; padding:0; font-size:9px;' % (t.page_width_mm, t.page_height_mm)">
+                        <div t-att-style="'position:absolute; left:0mm; top:0mm; width:%smm; height:%smm; border:0.3mm solid #000;' % (t.page_width_mm-0.6, t.page_height_mm-0.6)"/>
+
+                        <t t-foreach="range(10, 131, 10)" t-as="x">
+                            <div t-att-style="'position:absolute; left:%smm; top:0mm; width:0.2mm; height:%smm; background:#bbb;' % (x, t.page_height_mm)"/>
+                            <div t-att-style="'position:absolute; left:%smm; top:1mm; font-size:7px; color:#666;' % x"><span t-esc="x"/></div>
+                        </t>
+                        <t t-foreach="range(10, 271, 10)" t-as="y">
+                            <div t-att-style="'position:absolute; left:0mm; top:%smm; height:0.2mm; width:%smm; background:#bbb;' % (y, t.page_width_mm)"/>
+                            <div t-att-style="'position:absolute; left:1mm; top:%smm; font-size:7px; color:#666;' % y"><span t-esc="y"/></div>
+                        </t>
+
+                        <div style="position:absolute; left:1mm; top:1mm; font-weight:700;">CALIBRACION CHEQUE</div>
+                        <div t-att-style="'position:absolute; left:%smm; top:%smm; width:6mm; height:0.3mm; background:#000;' % (t.check_no_left_mm + t.offset_left_mm, t.check_no_top_mm + t.offset_top_mm)"/>
+                        <div t-att-style="'position:absolute; left:%smm; top:%smm; width:0.3mm; height:6mm; background:#000;' % (t.check_no_left_mm + t.offset_left_mm, t.check_no_top_mm + t.offset_top_mm)"/>
+                        <div t-att-style="'position:absolute; left:%smm; top:%smm;' % (t.check_no_left_mm + t.offset_left_mm + 1, t.check_no_top_mm + t.offset_top_mm + 1)">X-cheque</div>
+                    </div>
+            </t>
+        </t>
+    </template>
+</odoo>

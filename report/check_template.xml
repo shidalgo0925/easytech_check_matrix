@@ -1,0 +1,38 @@
+<odoo>
+    <template id="report_easytech_check">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="t" t-value="o.journal_id.easytech_check_template_id or o.easytech_check_template_id"/>
+                <div class="page" t-att-style="'font-size:11px; position:relative; width:%smm; height:%smm; margin:0; padding:0; overflow:hidden;' % (t.page_width_mm, t.page_height_mm)">
+                    <t t-if="not t">
+                        <div style="padding:20px; color:#b00; font-weight:bold;">
+                            Falta plantilla de cheque en el pago o en el diario.
+                        </div>
+                    </t>
+                    <t t-if="t">
+                        <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;' % (t.check_no_top_mm + t.offset_top_mm, t.check_no_left_mm + t.offset_left_mm)">
+                            <strong t-esc="o.easytech_check_number or ''"/>
+                        </div>
+                        <t t-set="dstr" t-value="(o.date and o.date.strftime('%d%m%Y')) or '00000000'"/>
+                        <div style="position:absolute; white-space:nowrap;" t-att-style="'position:absolute;white-space:nowrap;top:%smm;left:%smm;letter-spacing:%smm;' % (t.date_top_mm + t.offset_top_mm, t.date_left_mm + t.offset_left_mm, t.date_digit_spacing_mm)">
+                            <span t-esc="dstr[0:2]"/><span t-att-style="'margin-right:%smm;' % t.date_group_gap_mm"/>
+                            <span t-esc="dstr[2:4]"/><span t-att-style="'margin-right:%smm;' % t.date_group_gap_mm"/>
+                            <span t-esc="dstr[4:8]"/>
+                        </div>
+                        <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;width:72mm;white-space:nowrap;overflow:hidden;text-overflow:clip;' % (t.beneficiary_top_mm + t.offset_top_mm, t.beneficiary_left_mm + t.offset_left_mm)">
+                            <span t-esc="o.partner_id.name"/>
+                        </div>
+                        <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;width:35mm;white-space:nowrap;overflow:hidden;text-overflow:clip;' % (t.amount_num_top_mm + t.offset_top_mm, t.amount_num_left_mm + t.offset_left_mm)">
+                            <span t-esc="o.amount"/> <span t-esc="o.currency_id.name"/>
+                        </div>
+                        <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;max-width:85mm; white-space:normal; line-height:1.2;' % (t.amount_txt_top_mm + t.offset_top_mm, t.amount_txt_left_mm + t.offset_left_mm)">
+                            <span t-esc="o.currency_id.amount_to_text(o.amount)"/>
+                        </div>
+
+                        
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

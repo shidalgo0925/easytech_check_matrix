@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_easytech_checkbook_user,easytech.checkbook user,model_easytech_checkbook,easytech_check_matrix.group_easytech_check_user,1,0,0,0
+access_easytech_checkbook_manager,easytech.checkbook manager,model_easytech_checkbook,easytech_check_matrix.group_easytech_check_manager,1,1,1,1
+access_easytech_check_template_user,easytech.check.template user,model_easytech_check_template,easytech_check_matrix.group_easytech_check_user,1,0,0,0
+access_easytech_check_template_manager,easytech.check.template manager,model_easytech_check_template,easytech_check_matrix.group_easytech_check_manager,1,1,1,1

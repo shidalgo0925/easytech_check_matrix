@@ -1,0 +1,148 @@
+<odoo>
+    <template id="check_template_designer_page" name="EasyTech Check Template Designer">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <title>Diseñador de Cheque Matricial</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; }
+                    .wrap { max-width: 1350px; margin: 18px auto; padding: 0 16px; }
+                    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+                    .title { font-size: 20px; font-weight: 700; }
+                    .layout { display:flex; gap:16px; align-items:flex-start; }
+                    .panel { width: 340px; background:#fff; border:1px solid #d9e0ea; border-radius:8px; padding:10px; }
+                    .panel h4 { margin: 6px 0 10px; }
+                    .row { display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px; }
+                    .row label { font-size:12px; color:#334; display:block; margin-bottom:2px; }
+                    .row input { width:100%; padding:6px; border:1px solid #c8d0dc; border-radius:4px; }
+                    .canvas-wrap { flex:1; background:#fff; border:1px solid #d9e0ea; border-radius:8px; padding:12px; overflow:auto; }
+                    .check-canvas { position:relative; background:#fff; border:1px solid #999; transform-origin: top left; }
+                    .field { position:absolute; background:rgba(38,132,255,.10); border:1px dashed #2684ff; border-radius:4px; padding:2px 6px; cursor:move; user-select:none; font-size:12px; z-index:3; }
+                    .preview-item { position:absolute; color:#111; font-size:13px; z-index:2; pointer-events:none; white-space:nowrap; }
+                    .preview-item.amount-text { max-width:300px; white-space:normal; line-height:1.2; }
+                    .preview-item.date { letter-spacing:2px; }
+                    .preview-item.beneficiary { width:272px; white-space:nowrap; overflow:hidden; }
+                    .preview-item.amount-num { width:132px; white-space:nowrap; overflow:hidden; }
+                    .actions { margin-top:10px; display:flex; gap:8px; }
+                    .btn { border:0; border-radius:6px; padding:8px 12px; cursor:pointer; }
+                    .btn-primary { background:#1677ff; color:#fff; }
+                    .btn-light { background:#eef2f8; color:#223; }
+                    .hint { font-size:12px; color:#667; margin-top:8px; }
+                    .ok { color:#128a2e; font-weight:700; }
+                </style>
+            </head>
+            <body>
+                <div class="wrap">
+                    <div class="topbar">
+                        <div class="title">Diseñador de Cheque Matricial v2.1 - <t t-esc="t.name"/></div>
+                        <div class="actions">
+                            <a class="btn btn-light" t-att-href="'/report/pdf/easytech_check_matrix.report_easytech_check_preview_template/%s' % t.id" target="_blank">Vista previa</a>
+                            <a class="btn btn-light" t-att-href="'/report/pdf/easytech_check_matrix.report_easytech_check_calibration/%s' % t.id" target="_blank">Calibracion</a>
+                            <a class="btn btn-light" t-att-href="'/web#id=%s&amp;model=easytech.check.template&amp;view_type=form' % t.id">Volver a plantilla</a>
+                        </div>
+                    </div>
+                    <div class="layout">
+                        <div class="panel">
+                            <h4>Posiciones (mm)</h4>
+                            <div class="row"><div><label>No. Cheque X</label><input id="check_no_left_mm" t-att-value="t.check_no_left_mm"/></div><div><label>No. Cheque Y</label><input id="check_no_top_mm" t-att-value="t.check_no_top_mm"/></div></div>
+                            <div class="row"><div><label>Fecha X</label><input id="date_left_mm" t-att-value="t.date_left_mm"/></div><div><label>Fecha Y</label><input id="date_top_mm" t-att-value="t.date_top_mm"/></div></div>
+                            <div class="row"><div><label>Beneficiario X</label><input id="beneficiary_left_mm" t-att-value="t.beneficiary_left_mm"/></div><div><label>Beneficiario Y</label><input id="beneficiary_top_mm" t-att-value="t.beneficiary_top_mm"/></div></div>
+                            <div class="row"><div><label>Monto # X</label><input id="amount_num_left_mm" t-att-value="t.amount_num_left_mm"/></div><div><label>Monto # Y</label><input id="amount_num_top_mm" t-att-value="t.amount_num_top_mm"/></div></div>
+                            <div class="row"><div><label>Monto letras X</label><input id="amount_txt_left_mm" t-att-value="t.amount_txt_left_mm"/></div><div><label>Monto letras Y</label><input id="amount_txt_top_mm" t-att-value="t.amount_txt_top_mm"/></div></div>
+                            <div class="row"><div><label>Offset X</label><input id="offset_left_mm" t-att-value="t.offset_left_mm"/></div><div><label>Offset Y</label><input id="offset_top_mm" t-att-value="t.offset_top_mm"/></div></div>
+                            <div class="actions">
+                                <button class="btn btn-primary" id="saveBtn">Guardar</button>
+                                <button class="btn btn-light" id="refreshBtn">Refrescar</button>
+                            </div>
+                            <div class="hint">Arrastra las cajas (azul). La vista previa negra simula impresion. <span id="status"></span></div>
+                        </div>
+                        <div class="canvas-wrap">
+                            <div class="check-canvas" id="canvas" t-att-style="'width:%spx;height:%spx;' % (t.page_width_mm * scale, t.page_height_mm * scale)">
+                                <div class="field" data-x="check_no_left_mm" data-y="check_no_top_mm">No. Cheque</div>
+                                <div class="field" data-x="date_left_mm" data-y="date_top_mm">Fecha</div>
+                                <div class="field" data-x="beneficiary_left_mm" data-y="beneficiary_top_mm">Beneficiario</div>
+                                <div class="field" data-x="amount_num_left_mm" data-y="amount_num_top_mm">Monto #</div>
+                                <div class="field" data-x="amount_txt_left_mm" data-y="amount_txt_top_mm">Monto letras</div>
+                                
+                                <div class="preview-item" data-x="check_no_left_mm" data-y="check_no_top_mm"><strong>000123</strong></div>
+                                <div class="preview-item date" data-x="date_left_mm" data-y="date_top_mm">26032026</div>
+                                <div class="preview-item beneficiary" data-x="beneficiary_left_mm" data-y="beneficiary_top_mm">QUIMPAC DE COLOMBIA S A</div>
+                                <div class="preview-item amount-num" data-x="amount_num_left_mm" data-y="amount_num_top_mm">963.00 PAB</div>
+                                <div class="preview-item amount-text" data-x="amount_txt_left_mm" data-y="amount_txt_top_mm">Novecientos Sesenta y Tres Balboa</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    const templateId = <t t-esc="t.id"/>;
+                    const scale = <t t-esc="scale"/>;
+                    const fields = Array.from(document.querySelectorAll('.field'));
+                    const statusEl = document.getElementById('status');
+
+                    function toNum(v){ const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+                    function getVal(id){ return toNum(document.getElementById(id).value); }
+                    function setVal(id,v){ document.getElementById(id).value = (Math.round(v*100)/100).toString(); }
+
+                    function applyPositions(){
+                        const ox = getVal('offset_left_mm');
+                        const oy = getVal('offset_top_mm');
+                        fields.forEach(el => {
+                            const x = getVal(el.dataset.x) + ox;
+                            const y = getVal(el.dataset.y) + oy;
+                            el.style.left = `${x * scale}px`;
+                            el.style.top = `${y * scale}px`;
+                        });
+                        document.querySelectorAll('.preview-item').forEach(el => {
+                            const x = getVal(el.dataset.x) + ox;
+                            const y = getVal(el.dataset.y) + oy;
+                            el.style.left = `${x * scale}px`;
+                            el.style.top = `${y * scale}px`;
+                        });
+                    }
+
+                    function setupDrag(el){
+                        let startX=0,startY=0,origX=0,origY=0,drag=false;
+                        el.addEventListener('pointerdown', (e)=>{
+                            drag=true; el.setPointerCapture(e.pointerId);
+                            startX=e.clientX; startY=e.clientY;
+                            origX=getVal(el.dataset.x); origY=getVal(el.dataset.y);
+                        });
+                        el.addEventListener('pointermove', (e)=>{
+                            if(!drag) return;
+                            const dx=(e.clientX-startX)/scale;
+                            const dy=(e.clientY-startY)/scale;
+                            setVal(el.dataset.x, origX+dx);
+                            setVal(el.dataset.y, origY+dy);
+                            applyPositions();
+                        });
+                        el.addEventListener('pointerup', ()=>{ drag=false; });
+                    }
+
+                    fields.forEach(setupDrag);
+                    document.getElementById('refreshBtn').addEventListener('click', applyPositions);
+                    document.querySelectorAll('input').forEach(i => i.addEventListener('input', applyPositions));
+
+                    document.getElementById('saveBtn').addEventListener('click', async ()=>{
+                        const values = {};
+                        [
+                            'offset_top_mm','offset_left_mm','check_no_top_mm','check_no_left_mm','date_top_mm','date_left_mm',
+                            'beneficiary_top_mm','beneficiary_left_mm','amount_num_top_mm','amount_num_left_mm',
+                            'amount_txt_top_mm','amount_txt_left_mm'
+                        ].forEach(k => values[k] = getVal(k));
+                        const r = await fetch('/easytech/check-template/save', {
+                            method: 'POST',
+                            headers: {'Content-Type':'application/json'},
+                            body: JSON.stringify({jsonrpc:'2.0', method:'call', params:{template_id: templateId, values}, id: Date.now()})
+                        });
+                        const j = await r.json();
+                        const res = j.result || j;
+                        statusEl.textContent = res.ok ? 'Guardado' : ('Error: ' + (res.error || 'desconocido'));
+                        statusEl.className = res.ok ? 'ok' : '';
+                    });
+
+                    applyPositions();
+                </script>
+            </body>
+        </html>
+    </template>
+</odoo>
