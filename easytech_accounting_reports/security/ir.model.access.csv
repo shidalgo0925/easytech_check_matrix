@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_easytech_cash_requirement_wizard,access.easytech.cash.requirement.wizard,model_easytech_cash_requirement_wizard,account.group_account_invoice,1,1,1,1
+access_easytech_cash_requirement_line,access.easytech.cash.requirement.line,model_easytech_cash_requirement_line,account.group_account_invoice,1,1,1,1
+access_easytech_vendor_ledger_wizard,access.easytech.vendor.ledger.wizard,model_easytech_vendor_ledger_wizard,account.group_account_invoice,1,1,1,1
+access_easytech_vendor_ledger_line,access.easytech.vendor.ledger.line,model_easytech_vendor_ledger_line,account.group_account_invoice,1,1,1,1
+access_easytech_ap_aging_wizard,access.easytech.ap.aging.wizard,model_easytech_ap_aging_wizard,account.group_account_invoice,1,1,1,1
+access_easytech_ap_aging_line,access.easytech.ap.aging.line,model_easytech_ap_aging_line,account.group_account_invoice,1,1,1,1

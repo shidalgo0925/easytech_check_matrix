@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_easytech_check_register" model="ir.actions.act_window">
+        <field name="name">Registro de cheques EasyTech</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,kanban,form,graph,activity</field>
+        <field name="domain">[
+            ('payment_type', '=', 'outbound'),
+            ('journal_id.easytech_use_check_matrix', '=', True),
+        ]</field>
+        <field name="context">{
+            'default_payment_type': 'outbound',
+            'default_partner_type': 'supplier',
+            'search_default_outbound_filter': 1,
+            'default_move_journal_types': ('bank', 'cash'),
+        }</field>
+        <field name="view_id" ref="account.view_account_supplier_payment_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Pagos emitidos desde diarios con cheque matricial EasyTech.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_easytech_pending_checks" model="ir.actions.act_window">
+        <field name="name">Cheques pendientes de cobro</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,kanban,form,graph,activity</field>
+        <field name="domain">[
+            ('payment_type', '=', 'outbound'),
+            ('journal_id.easytech_use_check_matrix', '=', True),
+            ('easytech_printed', '=', True),
+            ('easytech_check_state', '!=', 'cancelled'),
+            ('is_matched', '=', False),
+        ]</field>
+        <field name="context">{
+            'default_payment_type': 'outbound',
+            'default_partner_type': 'supplier',
+            'search_default_outbound_filter': 1,
+            'default_move_journal_types': ('bank', 'cash'),
+        }</field>
+        <field name="view_id" ref="account.view_account_supplier_payment_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cheques impresos que aún no están conciliados con extracto bancario.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_easytech_check_register"
+        name="Registro de cheques EasyTech"
+        parent="easytech_accounting_reports.menu_easytech_payables_root"
+        action="action_easytech_check_register"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_easytech_pending_checks"
+        name="Cheques pendientes de cobro"
+        parent="easytech_accounting_reports.menu_easytech_payables_root"
+        action="action_easytech_pending_checks"
+        sequence="30"
+    />
+</odoo>

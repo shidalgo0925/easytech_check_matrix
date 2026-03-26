@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_easytech_cash_requirement_line_tree" model="ir.ui.view">
+        <field name="name">easytech.cash.requirement.line.tree</field>
+        <field name="model">easytech.cash.requirement.line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" create="0" delete="0" decoration-muted="not selected">
+                <field name="selected"/>
+                <field name="partner_id"/>
+                <field name="name"/>
+                <field name="invoice_date"/>
+                <field name="invoice_date_due"/>
+                <field name="days_overdue"/>
+                <field name="amount_residual"/>
+                <field name="partner_running_balance"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="move_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_easytech_cash_requirement_wizard_form" model="ir.ui.view">
+        <field name="name">easytech.cash.requirement.wizard.form</field>
+        <field name="model">easytech.cash.requirement.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Requerimiento de efectivo">
+                <group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="journal_id"/>
+                        <field name="payment_method_line_id"/>
+                        <field name="available_payment_method_line_ids" column_invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="partner_ids" widget="many2many_tags"/>
+                        <field name="only_overdue"/>
+                        <field name="open_check_preview_after_payment"/>
+                    </group>
+                </group>
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_reload_lines" type="object" string="Actualizar lista" class="btn-secondary"/>
+                    <button name="action_export_csv" type="object" string="Exportar CSV" class="btn-secondary"/>
+                    <button name="action_export_xlsx" type="object" string="Exportar Excel" class="btn-secondary"/>
+                    <button name="action_register_payment" type="object" string="Registrar pago (cheque)" class="btn-primary"/>
+                </div>
+                <field name="line_ids" nolabel="1"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_easytech_cash_requirement_wizard" model="ir.actions.act_window">
+        <field name="name">Requerimiento de efectivo</field>
+        <field name="res_model">easytech.cash.requirement.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="menu_easytech_cash_requirements"
+        name="Requerimiento de efectivo"
+        parent="easytech_accounting_reports.menu_easytech_payables_root"
+        action="action_easytech_cash_requirement_wizard"
+        sequence="10"
+    />
+</odoo>
