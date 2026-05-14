@@ -2,7 +2,8 @@
     <template id="report_easytech_check_preview_template">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="t">
-                <div class="page" t-att-style="'font-size:11px; position:relative; width:%smm; height:%smm; margin:0; padding:0; overflow:hidden;' % (t.page_width_mm, t.page_height_mm)">
+                <div class="page easytech-check-outer" t-att-style="t.report_outer_style + 'font-size:12pt;font-weight:bold;'">
+                    <div class="easytech-check-inner" t-att-style="t.report_inner_style">
                     <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;' % (t.check_no_top_mm + t.offset_top_mm, t.check_no_left_mm + t.offset_left_mm)">
                         <strong>000123</strong>
                     </div>
@@ -20,6 +21,7 @@
                     </div>
                     <div style="position:absolute;" t-att-style="'position:absolute;top:%smm;left:%smm;max-width:85mm; white-space:normal; line-height:1.2;' % (t.amount_txt_top_mm + t.offset_top_mm, t.amount_txt_left_mm + t.offset_left_mm)">
                         <span t-esc="t.env._('Nine hundred sixty-three balboa')"/>
+                    </div>
                     </div>
                 </div>
             </t>

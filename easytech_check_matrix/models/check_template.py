@@ -1,4 +1,4 @@
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 
 
 class EasytechCheckTemplate(models.Model):
@@ -22,6 +22,26 @@ class EasytechCheckTemplate(models.Model):
 
     page_height_mm = fields.Integer(string=_("Page height (mm)"), default=279, required=True)
     page_width_mm = fields.Integer(string=_("Page width (mm)"), default=140, required=True)
+
+    check_print_mode = fields.Selection(
+        [
+            ("standard", _("Standard (PDF matches template mm)")),
+            ("wkhtml_landscape", _("PDF landscape (wide feed / Epson drivers)")),
+            ("rotate_ccw90", _("Rotate content 90° counter-clockwise")),
+            ("rotate_cw90", _("Rotate content 90° clockwise")),
+        ],
+        string=_("Print alignment"),
+        default="standard",
+        help=_(
+            "If data prints sideways on preprinted checks (e.g. Banco General + dot matrix), "
+            "try “PDF landscape” first, then one of the rotations. "
+            "Recalibrate positions in the visual designer after changing this."
+        ),
+    )
+
+    report_outer_style = fields.Char(compute="_compute_report_canvas_styles")
+    report_inner_style = fields.Char(compute="_compute_report_canvas_styles")
+
     offset_top_mm = fields.Float(string=_("Offset top (mm)"), default=0.0)
     offset_left_mm = fields.Float(string=_("Offset left (mm)"), default=0.0)
 
@@ -45,6 +65,48 @@ class EasytechCheckTemplate(models.Model):
 
     voucher_top_mm = fields.Float(string=_("Voucher top (mm)"), default=151.0)
     voucher_left_mm = fields.Float(string=_("Voucher left (mm)"), default=8.0)
+
+    @api.depends(
+        "page_width_mm",
+        "page_height_mm",
+        "check_print_mode",
+    )
+    def _compute_report_canvas_styles(self):
+        for rec in self:
+            pw = int(rec.page_width_mm or 0) or 140
+            ph = int(rec.page_height_mm or 0) or 279
+            mode = rec.check_print_mode or "standard"
+            if mode == "rotate_ccw90":
+                ow, oh = ph, pw
+                rot = -90
+                ml = -pw / 2.0
+                mt = -ph / 2.0
+                rec.report_outer_style = (
+                    f"position:relative;width:{ow}mm;height:{oh}mm;margin:0;padding:0;overflow:hidden;"
+                )
+                rec.report_inner_style = (
+                    f"position:absolute;left:50%;top:50%;width:{pw}mm;height:{ph}mm;"
+                    f"margin-left:{ml}mm;margin-top:{mt}mm;"
+                    f"transform:rotate({rot}deg);transform-origin:center center;"
+                )
+            elif mode == "rotate_cw90":
+                ow, oh = ph, pw
+                rot = 90
+                ml = -pw / 2.0
+                mt = -ph / 2.0
+                rec.report_outer_style = (
+                    f"position:relative;width:{ow}mm;height:{oh}mm;margin:0;padding:0;overflow:hidden;"
+                )
+                rec.report_inner_style = (
+                    f"position:absolute;left:50%;top:50%;width:{pw}mm;height:{ph}mm;"
+                    f"margin-left:{ml}mm;margin-top:{mt}mm;"
+                    f"transform:rotate({rot}deg);transform-origin:center center;"
+                )
+            else:
+                rec.report_outer_style = (
+                    f"position:relative;width:{pw}mm;height:{ph}mm;margin:0;padding:0;overflow:hidden;"
+                )
+                rec.report_inner_style = f"position:relative;width:{pw}mm;height:{ph}mm;"
 
     def action_open_visual_designer(self):
         self.ensure_one()

@@ -11,7 +11,7 @@ EasyTech matrix check engine for Odoo Community.
 - Printing with status and checkbook numbering.
 - Per-bank templates with offsets.
 """,
-    "version": "18.0.1.0.1",
+    "version": "18.0.1.0.3",
     "author": "Easy Technology Services Panamá",
     "website": "https://easytech.services",
     "license": "LGPL-3",

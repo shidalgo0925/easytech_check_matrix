@@ -8,6 +8,7 @@
                 <field name="journal_id"/>
                 <field name="page_width_mm"/>
                 <field name="page_height_mm"/>
+                <field name="check_print_mode"/>
                 <field name="active"/>
             </list>
         </field>
@@ -31,6 +32,7 @@
                     <group string="Page size and offsets (mm)">
                         <field name="page_width_mm"/>
                         <field name="page_height_mm"/>
+                        <field name="check_print_mode"/>
                         <field name="offset_left_mm"/>
                         <field name="offset_top_mm"/>
                     </group>
